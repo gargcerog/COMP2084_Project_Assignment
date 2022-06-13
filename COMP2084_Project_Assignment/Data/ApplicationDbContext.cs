@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using COMP2084_Project_Assignment.Models;
 
 namespace COMP2084_Project_Assignment.Data
 {
@@ -9,5 +10,6 @@ namespace COMP2084_Project_Assignment.Data
             : base(options)
         {
         }
+        public DbSet<COMP2084_Project_Assignment.Models.Employee>? Employee { get; set; }
     }
 }
