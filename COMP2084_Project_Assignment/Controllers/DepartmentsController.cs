@@ -42,7 +42,16 @@ namespace COMP2084_Project_Assignment.Controllers
                 return NotFound();
             }
 
-            return View(department);
+            var employees = _context.Employee.Where(m => m.DepartmentId == id).OrderBy(employee => employee.Name);
+
+            var viewModel = new DepartmentViewModel()
+            {
+                Name = department.Name,
+                Id = department.Id,
+                Employees = employees.ToList()
+            };
+
+            return View(viewModel);
         }
 
         // GET: Departments/Create
@@ -160,4 +169,13 @@ namespace COMP2084_Project_Assignment.Controllers
           return (_context.Department?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
+
+    public class DepartmentViewModel 
+    { 
+        public  int Id { get; set; }
+        public string Name  { get; set; }
+        public ICollection<Employee>? Employees { get; set;}
+
+    }
+
 }
