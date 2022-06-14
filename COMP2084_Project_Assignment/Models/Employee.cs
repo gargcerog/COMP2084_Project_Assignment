@@ -24,5 +24,13 @@ namespace COMP2084_Project_Assignment.Models
         {
             get { return $"{Name}-{UserName}-{PhoneNumber}-{Age}"; }
         }
+
+        [ForeignKey("Department")]
+        public int? DepartmentId { get; set; }
+        public Department? Deparment { get; set; }
+
+
+
+
     }
 }
