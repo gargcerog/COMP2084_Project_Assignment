@@ -274,11 +274,11 @@ namespace COMP2084_Project_Assignment.Data.Migrations
 
             modelBuilder.Entity("COMP2084_Project_Assignment.Models.Employee", b =>
                 {
-                    b.HasOne("COMP2084_Project_Assignment.Models.Department", "Deparment")
+                    b.HasOne("COMP2084_Project_Assignment.Models.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
 
-                    b.Navigation("Deparment");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

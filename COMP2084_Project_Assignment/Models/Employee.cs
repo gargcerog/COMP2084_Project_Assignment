@@ -27,7 +27,7 @@ namespace COMP2084_Project_Assignment.Models
 
         [ForeignKey("Department")]
         public int? DepartmentId { get; set; }
-        public Department? Deparment { get; set; }
+        public Department? Department { get; set; }
 
 
 

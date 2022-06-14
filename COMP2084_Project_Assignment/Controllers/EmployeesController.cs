@@ -22,7 +22,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employee.Include(e => e.Deparment);
+            var applicationDbContext = _context.Employee.Include(e => e.Department);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace COMP2084_Project_Assignment.Controllers
             }
 
             var employee = await _context.Employee
-                .Include(e => e.Deparment)
+                .Include(e => e.Department)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
@@ -131,7 +131,7 @@ namespace COMP2084_Project_Assignment.Controllers
             }
 
             var employee = await _context.Employee
-                .Include(e => e.Deparment)
+                .Include(e => e.Department)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
