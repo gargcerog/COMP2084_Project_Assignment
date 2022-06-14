@@ -11,5 +11,6 @@ namespace COMP2084_Project_Assignment.Data
         {
         }
         public DbSet<COMP2084_Project_Assignment.Models.Employee>? Employee { get; set; }
+        public DbSet<COMP2084_Project_Assignment.Models.Department>? Department { get; set; }
     }
 }
