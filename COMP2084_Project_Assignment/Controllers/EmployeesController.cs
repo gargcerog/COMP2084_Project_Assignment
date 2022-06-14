@@ -22,9 +22,8 @@ namespace COMP2084_Project_Assignment.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-              return _context.Employee != null ? 
-                          View(await _context.Employee.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Employee'  is null.");
+            var applicationDbContext = _context.Employee.Include(e => e.Deparment);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -36,6 +35,7 @@ namespace COMP2084_Project_Assignment.Controllers
             }
 
             var employee = await _context.Employee
+                .Include(e => e.Deparment)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
@@ -48,6 +48,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
+            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,UserName,PhoneNumber")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,Name,UserName,PhoneNumber,Age,DepartmentId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +65,7 @@ namespace COMP2084_Project_Assignment.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name", employee.DepartmentId);
             return View(employee);
         }
 
@@ -80,6 +82,7 @@ namespace COMP2084_Project_Assignment.Controllers
             {
                 return NotFound();
             }
+            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name", employee.DepartmentId);
             return View(employee);
         }
 
@@ -88,7 +91,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UserName,PhoneNumber")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UserName,PhoneNumber,Age,DepartmentId")] Employee employee)
         {
             if (id != employee.Id)
             {
@@ -115,6 +118,7 @@ namespace COMP2084_Project_Assignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name", employee.DepartmentId);
             return View(employee);
         }
 
@@ -127,6 +131,7 @@ namespace COMP2084_Project_Assignment.Controllers
             }
 
             var employee = await _context.Employee
+                .Include(e => e.Deparment)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
