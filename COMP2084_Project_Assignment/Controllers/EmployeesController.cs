@@ -48,7 +48,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name");
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace COMP2084_Project_Assignment.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address", employee.DepartmentId);
             return View(employee);
         }
 
@@ -82,7 +82,7 @@ namespace COMP2084_Project_Assignment.Controllers
             {
                 return NotFound();
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address", employee.DepartmentId);
             return View(employee);
         }
 
@@ -118,7 +118,7 @@ namespace COMP2084_Project_Assignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Set<Department>(), "Id", "Name", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address", employee.DepartmentId);
             return View(employee);
         }
 

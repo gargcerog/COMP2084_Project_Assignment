@@ -48,6 +48,8 @@ namespace COMP2084_Project_Assignment.Controllers
             {
                 Name = department.Name,
                 Id = department.Id,
+                Address = department.Address,
+                PostalCode = department.PostalCode,
                 Employees = employees.ToList()
             };
 
@@ -65,7 +67,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Department department)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PostalCode")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +99,7 @@ namespace COMP2084_Project_Assignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Department department)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,PostalCode")] Department department)
         {
             if (id != department.Id)
             {
@@ -170,10 +172,12 @@ namespace COMP2084_Project_Assignment.Controllers
         }
     }
 
-    public class DepartmentViewModel 
-    { 
+    public class DepartmentViewModel
+    {
         public  int Id { get; set; }
         public string Name  { get; set; }
+        public string Address { get; set; }
+        public string PostalCode { get; set; }
         public ICollection<Employee>? Employees { get; set;}
 
     }
