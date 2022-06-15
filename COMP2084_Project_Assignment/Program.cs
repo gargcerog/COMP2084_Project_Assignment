@@ -18,6 +18,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+// Facebook Service Signin Added
+var services = builder.Services;
+var configuration = builder.Configuration;
+services.AddAuthentication().AddFacebook(facebookOptions =>
+{
+    facebookOptions.AppId = "560095689044091";
+    facebookOptions.AppSecret = "788b147bcdc9fb276ea1aacc10083508";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
