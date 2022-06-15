@@ -38,3 +38,8 @@ footer {
 #home-text {
     padding-top: 50px;
 }
+
+.borderpane .display-4 {
+    backdrop-filter: brightness(0.5);
+    color: floralwhite;
+}
