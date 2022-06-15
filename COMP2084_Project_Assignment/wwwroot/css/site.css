@@ -16,3 +16,25 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*Added Customized CSS*/
+
+footer > div > p { 
+    margin: 0px;
+    line-height: 27px;
+}
+
+
+#home-borderpane {
+    background-image: url('../img/deskhome.jpg');
+    height: 300px;
+}
+
+footer {
+    position: unset;
+    height: 0px;
+}
+
+#home-text {
+    padding-top: 50px;
+}
