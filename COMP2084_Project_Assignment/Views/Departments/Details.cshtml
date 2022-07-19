@@ -1,7 +1,12 @@
-﻿@model COMP2084_Project_Assignment.Controllers.DepartmentViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model COMP2084_Project_Assignment.Controllers.DepartmentViewModel
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "_CustomLayout";
 }
 
 <h1>Details</h1>
@@ -53,15 +58,20 @@
                        <td>
                            @Html.DisplayFor(modelItem => employee.Age)
                        </td>
-                       <td>
-                           @Html.ActionLink("Edit", "Edit", "Employees", new { id = employee.Id })
-                       </td>
-                       <td>
+                        <td>
                            @Html.ActionLink("Details", "Details", "Employees", new { id = employee.Id })
                        </td>
-                       <td>
-                           @Html.ActionLink("Delete", "Delete", "Employees", new { id = employee.Id })
-                       </td>
+                       @if (SignInManager.IsSignedIn(User))
+                        {
+                            <td>
+                                <b> | </b>
+                                @Html.ActionLink("Edit", "Edit", "Employees", new { id = employee.Id })
+                            </td>
+                            <td>
+                                <b> | </b>
+                                @Html.ActionLink("Delete", "Delete", "Employees", new { id = employee.Id })
+                            </td>   
+                        }
                    </tr>
                }
            </tbody>
@@ -69,6 +79,10 @@
     }
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <b> | </b>
+    }
     <a asp-action="Index">Back to List</a>
 </div>
