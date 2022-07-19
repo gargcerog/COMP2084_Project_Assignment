@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());*/
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");//("AzureDB");
+var connectionString = builder.Configuration.GetConnectionString("SQLDatabase");//("DefaultConnection");//("AzureDB");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
