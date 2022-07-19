@@ -14,18 +14,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+//Google Authentication
+var services = builder.Services;
+var configuration = builder.Configuration;
+
+services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = configuration["Google:Authentication:ClientId"];
+    googleOptions.ClientSecret = configuration["Google:Authentication:ClientSecret"];
+});
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-
-// Facebook Service Signin Added
-var services = builder.Services;
-var configuration = builder.Configuration;
-services.AddAuthentication().AddFacebook(facebookOptions =>
-{
-    facebookOptions.AppId = "560095689044091";
-    facebookOptions.AppSecret = "788b147bcdc9fb276ea1aacc10083508";
-});
 
 var app = builder.Build();
 
