@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using COMP2084_Project_Assignment.Data;
 using COMP2084_Project_Assignment.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace COMP2084_Project_Assignment.Controllers
 {
@@ -46,15 +47,17 @@ namespace COMP2084_Project_Assignment.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize]
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address");
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Name");
             return View();
         }
-
+        
         // POST: Employees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,UserName,PhoneNumber,Age,DepartmentId")] Employee employee)
@@ -65,11 +68,12 @@ namespace COMP2084_Project_Assignment.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Name", employee.DepartmentId);
             return View(employee);
         }
 
         // GET: Employees/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Employee == null)
@@ -82,13 +86,14 @@ namespace COMP2084_Project_Assignment.Controllers
             {
                 return NotFound();
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Name", employee.DepartmentId);
             return View(employee);
         }
 
         // POST: Employees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UserName,PhoneNumber,Age,DepartmentId")] Employee employee)
@@ -118,11 +123,12 @@ namespace COMP2084_Project_Assignment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Address", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "Id", "Name", employee.DepartmentId);
             return View(employee);
         }
 
         // GET: Employees/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Employee == null)
@@ -142,6 +148,7 @@ namespace COMP2084_Project_Assignment.Controllers
         }
 
         // POST: Employees/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
