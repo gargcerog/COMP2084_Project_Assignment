@@ -2,8 +2,8 @@
 ## Purpose of the application:
 - A website that allows the user to book a desktop site in a coworking space or area. The example that is used in this project is from a company that has several branches, and it's implementing this booking system to manage available work palaces for their workers who are returning to work at the office. The users can register, log in to their accounts, and see their reservations. The user can pick from different desks available at different locations, and the website will check if that desk is available for booking or if it has been chosen by someone else. The user can also check the different features of the desk, such as if the desk has another monitor or standing desk.
 
-## Link to the published website on the Azure server:
-- https://comp2084projectassignment20220613180634.azurewebsites.net
+## Link to the published website on the server:
+- http://gargceroprot-001-site1.htempurl.com
  
 ## Sources:
 ### Home Page
