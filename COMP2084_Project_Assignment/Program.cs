@@ -9,9 +9,14 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+/*
 var connectionString = builder.Configuration.GetConnectionString("SQLDatabase");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+*/
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "TestProjectAssignment"));
+
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Google Authentication - start        
