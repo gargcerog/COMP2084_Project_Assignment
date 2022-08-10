@@ -64,6 +64,42 @@ namespace COMP2084_Project_Assignment.Tests
             }
         }
 
+        [Fact]
+        public async Task Create_Employees_Null_Test()
+        {
+            using (var testDb = new ApplicationDbContext(GetTestDbOpts()))
+            {
+                var testCtrl = new EmployeesController(testDb);
+                var fakeEmployees = MakeFakeEmployees(3);
+
+                // Index for the employee that will be converted to null
+                int index = 0;
+
+                // Adding new Employees
+                foreach (var employee in fakeEmployees)
+                {
+                    // Converting the first employee object to a null 
+                    var employeeRef = employee;
+                    if (index == 0)
+                    {
+                        employeeRef = null;
+                    }
+
+                    try 
+                    {
+                        var result = await testCtrl.Create(employeeRef);
+                        var resultVr = Assert.IsType<RedirectToActionResult>(result);
+                        Assert.Equal("Index", resultVr.ActionName);
+                    } 
+                    catch (Exception ex)
+                    {
+                        Assert.Equal("System.ArgumentNullException" , ex.GetType().ToString());
+                        Assert.Null(employeeRef);
+                    }
+                    index++;
+                }
+            }
+        }
 
         //----------------- Additional Methods---------------------------
 

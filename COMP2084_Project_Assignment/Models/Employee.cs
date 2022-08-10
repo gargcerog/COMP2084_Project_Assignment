@@ -11,7 +11,7 @@ namespace COMP2084_Project_Assignment.Models
         [MaxLength(100), MinLength(1)]
         public string Name { get; set; }
         [Required]
-        [MaxLength(20, ErrorMessage ="Username Cannot ba longer than 20 chars"), MinLength(1)]
+        [MaxLength(20, ErrorMessage ="Username Cannot be longer than 20 chars"), MinLength(1)]
         public string UserName { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
