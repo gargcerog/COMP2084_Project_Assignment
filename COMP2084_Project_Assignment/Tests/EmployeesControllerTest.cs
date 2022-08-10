@@ -30,6 +30,30 @@ namespace COMP2084_Project_Assignment.Tests
         }
 
 
+        [Fact]
+        public async Task Create_Employees_Invalid_Test()
+        {
+            using (var testDb = new ApplicationDbContext(GetTestDbOpts()))
+            {
+                var testCtrl = new EmployeesController(testDb);
+                var fakeEmployees = MakeFakeEmployees(3);
+
+                //Simulate an error condition in the employee creation
+                testCtrl.ModelState.AddModelError("model-state-error", "The model state is invalid");
+
+                // Adding new Employees
+                foreach (var employee in fakeEmployees)
+                {
+                    var result = await testCtrl.Create(employee);
+                    var resultVr = Assert.IsType<ViewResult>(result);
+
+                    // Check if the returned object is of expected type
+                    Assert.Equal(employee.GetType().ToString(), resultVr.Model.ToString());
+                }
+            }
+        }
+
+
         //----------------- Additional Methods---------------------------
 
         // Method returns a DbContextOptions<ApplicationDbContext> object with out in memory database configurations for running the tests
