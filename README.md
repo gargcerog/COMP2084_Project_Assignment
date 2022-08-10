@@ -20,6 +20,9 @@
                 
 - Own Css modifications: These where added to the code in the "~/css/site.css" document. <br />
 
+### Unit Testing:
+- Unit testing has been implemented for the create POST method from the Employees Controller and several tests have been added.
+
 ## Additional Features:
 - Users can register and log in by using a Google account.
 - How social authentication works:
