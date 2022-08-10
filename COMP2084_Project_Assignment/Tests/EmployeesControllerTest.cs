@@ -11,6 +11,8 @@ namespace COMP2084_Project_Assignment.Tests
     public class EmployeesControllerTest
     {
 
+        //Tests for the create POST method of the Employees Controller
+
         [Fact]
         public async Task Create_Employees_Test()
         {
@@ -25,6 +27,15 @@ namespace COMP2084_Project_Assignment.Tests
                     var result = await testCtrl.Create(employee);
                     var resultVr = Assert.IsType<RedirectToActionResult>(result);
                     Assert.Equal("Index", resultVr.ActionName);
+                }
+
+                // Testing if the values were saved 
+                var indexResult = await testCtrl.Index();
+                var indexResultVr = Assert.IsType<ViewResult>(indexResult);
+                var returnedEmployees = Assert.IsAssignableFrom<IEnumerable<Employee>>(indexResultVr.ViewData.Model);
+                foreach (var employee in fakeEmployees)
+                {
+                    Assert.Contains(employee, returnedEmployees);
                 }
             }
         }
